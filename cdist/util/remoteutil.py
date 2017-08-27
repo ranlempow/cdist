@@ -31,6 +31,14 @@ def inspect_ssh_mux_opts():
        Then it can be formatted:
        mux_opts_string.format('/tmp/tmpxxxxxx/ssh-control-path').
     """
+
+    # patch(@ranlempow): nullify inspect_ssh_mux_opts() in cygwin
+    import platform
+    plat = platform.system()
+    if plat.startswith('CYGWIN_NT') or plat.startswith('Windows'):
+      return ""
+
+
     import subprocess
 
     wanted_mux_opts = {
